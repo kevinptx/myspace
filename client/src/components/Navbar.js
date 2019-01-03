@@ -7,33 +7,27 @@ class Navbar extends React.Component {
   rightNavItems = () => {
     const {
       auth: { user, handleLogout },
-      location
+      location: { pathname },
+      history
     } = this.props;
 
     if (user) {
       return (
         <Menu.Menu position="right">
-          <Menu.Item
-            name="logout"
-            onClick={() => handleLogout(this.props.history)}
-          />
+          <Menu.Item name="Logout" onClick={() => handleLogout(history)} />
         </Menu.Menu>
       );
     } else {
       return (
         <Menu.Menu position="right">
-          <Link to="login">
-            <Menu.Item
-              id="login"
-              name="login"
-              active={location.pathname === "/login"}
-            />
+          <Link to="/login">
+            <Menu.Item name="Login" id="login" active={pathname === "/login"} />
           </Link>
           <Link to="/register">
             <Menu.Item
+              name="Register"
               id="register"
-              name="register"
-              active={location.pathname === "/register"}
+              active={pathname === "/register"}
             />
           </Link>
         </Menu.Menu>
@@ -47,9 +41,9 @@ class Navbar extends React.Component {
         <Menu pointing secondary>
           <Link to="/">
             <Menu.Item
-              name="home"
+              name="Home"
               id="home"
-              active={(this.props.location.pathname = "/")}
+              active={this.props.location.pathname === "/"}
             />
           </Link>
           {this.rightNavItems()}
@@ -59,7 +53,7 @@ class Navbar extends React.Component {
   }
 }
 
-export class ConnectedNavbar extends React.Component {
+class ConnectedNavbar extends React.Component {
   render() {
     return (
       <AuthConsumer>

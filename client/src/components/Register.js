@@ -12,14 +12,10 @@ class Register extends React.Component {
       auth: { handleRegister },
       history
     } = this.props;
-    if (password === passwordConfirmation && password.length > 6)
+
+    if (password === passwordConfirmation)
       handleRegister({ email, password, passwordConfirmation }, history);
-    else
-      alert(
-        password === passwordConfirmation
-          ? "Passwords Do Not Match!"
-          : "Password must be greater than 6 characters!"
-      );
+    else alert("Passwords Do Not Match!");
   };
 
   handleChange = e => {
@@ -42,7 +38,7 @@ class Register extends React.Component {
             autoFocus
             name="email"
             value={email}
-            placeHolder="Email"
+            placeholder="Email"
             onChange={this.handleChange}
           />
           <Form.Input
