@@ -12,8 +12,9 @@ class Register extends React.Component {
       auth: { handleRegister },
       history
     } = this.props;
-
-    if (password === passwordConfirmation)
+    if (password.length < 8)
+      alert("Password must be greater than 7 characters!");
+    else if (password === passwordConfirmation)
       handleRegister({ email, password, passwordConfirmation }, history);
     else alert("Passwords Do Not Match!");
   };
