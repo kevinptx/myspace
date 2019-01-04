@@ -3,11 +3,25 @@ import { AuthConsumer } from "../providers/AuthProvider";
 import { Button, Form, Segment, Header } from "semantic-ui-react";
 
 class Register extends React.Component {
-  state = { email: "", password: "", passwordConfirmation: "" };
+  state = {
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+    first_name: "",
+    last_name: "",
+    image: ""
+  };
 
   handleSubmit = e => {
     e.preventDefault();
-    const { email, password, passwordConfirmation } = this.state;
+    const {
+      email,
+      password,
+      passwordConfirmation,
+      first_name,
+      last_name,
+      image
+    } = this.state;
     const {
       auth: { handleRegister },
       history
@@ -15,7 +29,10 @@ class Register extends React.Component {
     if (password.length < 8)
       alert("Password must be greater than 7 characters!");
     else if (password === passwordConfirmation)
-      handleRegister({ email, password, passwordConfirmation }, history);
+      handleRegister(
+        { email, password, passwordConfirmation, first_name, last_name, image },
+        history
+      );
     else alert("Passwords Do Not Match!");
   };
 
@@ -25,7 +42,14 @@ class Register extends React.Component {
   };
 
   render() {
-    const { email, password, passwordConfirmation } = this.state;
+    const {
+      email,
+      password,
+      passwordConfirmation,
+      first_name,
+      last_name,
+      image
+    } = this.state;
 
     return (
       <Segment basic>
@@ -33,10 +57,36 @@ class Register extends React.Component {
           Register
         </Header>
         <Form onSubmit={this.handleSubmit}>
+          <Form.Group widths="equal">
+            <Form.Input
+              label="First Name"
+              required
+              autoFocus
+              name="first_name"
+              value={first_name}
+              placeholder="First Name"
+              onChange={this.handleChange}
+            />
+            <Form.Input
+              label="Last Name"
+              required
+              name="last_name"
+              value={last_name}
+              placeholder="Last Name"
+              onChange={this.handleChange}
+            />
+          </Form.Group>
+          <Form.Input
+            label="Profile Photo"
+            required
+            name="image"
+            value={image}
+            placeholder="Direct URL to Profile Photo"
+            onChange={this.handleChange}
+          />
           <Form.Input
             label="Email"
             required
-            autoFocus
             name="email"
             value={email}
             placeholder="Email"
