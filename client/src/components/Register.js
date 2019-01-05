@@ -14,6 +14,7 @@ class Register extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    //this is grabbing the filled out values, the new state from the user's form input.
     const {
       email,
       password,
@@ -22,6 +23,7 @@ class Register extends React.Component {
       last_name,
       image
     } = this.state;
+    //this is grabbing the handleRegister function off of props.
     const {
       auth: { handleRegister },
       history

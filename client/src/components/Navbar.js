@@ -6,7 +6,9 @@ import { Link, withRouter } from "react-router-dom";
 class Navbar extends React.Component {
   rightNavItems = () => {
     const {
+      //auth is what named the obj that came from AuthConsumer.
       auth: { user, handleLogout },
+      //location and history are coming from react router.
       location,
       history
     } = this.props;
@@ -59,6 +61,7 @@ class Navbar extends React.Component {
   };
 
   userNavItems = () => {
+    //this is creating a variable.
     const {
       auth: { user, handleLogout },
       location,

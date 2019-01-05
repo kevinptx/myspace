@@ -4,9 +4,12 @@ import axios from "axios";
 const AuthContext = React.createContext();
 export const AuthConsumer = AuthContext.Consumer;
 
+//the provider has the resource and the consumer asks for the resource.
 export class AuthProvider extends React.Component {
+  //the default state of this component
   state = { user: null };
 
+  //history for the redirect and user object to make the axios post.
   handleRegister = (user, history) => {
     axios
       .post("/api/auth", user)
@@ -23,6 +26,7 @@ export class AuthProvider extends React.Component {
     axios
       .post("/api/auth/sign_in", user)
       .then(res => {
+        // this is changing the value of state.
         this.setState({ user: res.data.data });
         history.push("/");
       })
